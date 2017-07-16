@@ -22,7 +22,7 @@ public class GreetingController {
     }
    
     
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="/getModels",  method = RequestMethod.POST)
     public @ResponseBody WebhookResponse getModels(@RequestBody String obj){
 
         System.out.println(obj);
