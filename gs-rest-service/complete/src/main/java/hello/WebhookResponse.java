@@ -10,14 +10,11 @@ public class WebhookResponse {
 
     private final String source = "java-webhook";
     private final List contextOut;
-    private final Object data;
-          
     
     public WebhookResponse(String speech, String displayText) {
         this.speech = speech;
         this.displayText = displayText;
         this.contextOut = new ArrayList();
-        this.data = new Object();
     }
 
     public String getSpeech() {
@@ -31,4 +28,9 @@ public class WebhookResponse {
     public String getSource() {
         return source;
     }
+
+	public List getContextOut() {
+		return contextOut;
+	}
+
 }

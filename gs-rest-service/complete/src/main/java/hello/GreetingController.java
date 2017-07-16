@@ -27,6 +27,6 @@ public class GreetingController {
 
         System.out.println(obj);
 
-        return new WebhookResponse("Hello! " + obj, "Text " + obj);
+        return new WebhookResponse("Hello! I am Chitra", "Text, Yup I told you so");
     }
 }
