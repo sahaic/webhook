@@ -12,21 +12,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingController {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
+	private static final String template = "Hello, %s!";
+	private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/greeting")
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name));
-    }
-   
-    
-    @RequestMapping(value="/getModels",  method = RequestMethod.POST)
-    public @ResponseBody WebhookResponse getModels(@RequestBody String obj){
+	@RequestMapping("/greeting")
+	public Greeting greeting(
+			@RequestParam(value = "name", defaultValue = "World") String name) {
+		return new Greeting(counter.incrementAndGet(), String.format(template,
+				name));
+	}
 
-        System.out.println(obj);
+	@RequestMapping(value = "/getModels", method = RequestMethod.POST)
+	public @ResponseBody WebhookResponse getModels(@RequestBody String obj) {
 
-        return new WebhookResponse("Hello! I am Chitra", "Text, Yup I told you so");
-    }
+		if (obj.lastIndexOf("input.welcome.action.name") >= 0) {
+			System.out.println(obj);
+		} else {
+			System.out.println("Test World");
+		}
+
+		return new WebhookResponse("Hello! I am Chitra",
+				"Text, Yup I told you so");
+	}
 }
