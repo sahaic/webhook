@@ -23,14 +23,12 @@ public class GreetingController {
 	}
 
 	@RequestMapping(value = "/getModels", method = RequestMethod.POST)
-	public @ResponseBody WebhookResponse getModels(@RequestBody String obj) {
+	public @ResponseBody WebhookResponse getModels(@RequestBody WebhookRequest obj) {
 		String speech="";
 
-		if (obj.lastIndexOf("input.welcome.action.name") >= 0) {
-			System.out.println(obj);
+		if (obj.getResult().getAction().equalsIgnoreCase("input.welcome.action.name")) {
 			speech="Hello! I am Chitra";
 		} else {
-			System.out.println("Test World");
 			speech="Hello! I am Mitra";
 		}
 		
