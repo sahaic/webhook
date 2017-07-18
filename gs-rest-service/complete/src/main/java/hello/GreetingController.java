@@ -31,18 +31,6 @@ public class GreetingController {
 			String oem=obj.getResult().getParameters().get("oem");
 			 model=getModelByOEMAndCategory(oem,category);
 		}
-		// if
-		// (obj.getResult().getAction().equalsIgnoreCase("input.welcome.action.name"))
-		// {
-		// speech="Hello! I am Chitra";
-		// } else {
-		// speech="Hello! I am Mitra";
-		// }
-		//
-		//
-		// return new WebhookResponse(speech,
-		// "Text, Yup I told you so");
-		// }
 		return new WebhookResponse(model,"");
 	}
 
