@@ -22,18 +22,46 @@ public class GreetingController {
 				name));
 	}
 
-	@RequestMapping(value = "/getModels", method = RequestMethod.POST)
-	public @ResponseBody WebhookResponse getModels(@RequestBody WebhookRequest obj) {
-		String speech="";
-
-		if (obj.getResult().getAction().equalsIgnoreCase("input.welcome.action.name")) {
-			speech="Hello! I am Chitra";
-		} else {
-			speech="Hello! I am Mitra";
+	@RequestMapping(value = "/getByAttribute", method = RequestMethod.POST)
+	public @ResponseBody WebhookResponse getModels(
+			@RequestBody WebhookRequest obj) {
+		String model="";
+		if (obj.getResult() !=null && obj.getResult().getAction()!=null && obj.getResult().getAction().equalsIgnoreCase("get_model")) {
+			String category=obj.getResult().getParameters().get("category");
+			String oem=obj.getResult().getParameters().get("oem");
+			 model=getModelByOEMAndCategory(oem,category);
 		}
-		
+		// if
+		// (obj.getResult().getAction().equalsIgnoreCase("input.welcome.action.name"))
+		// {
+		// speech="Hello! I am Chitra";
+		// } else {
+		// speech="Hello! I am Mitra";
+		// }
+		//
+		//
+		// return new WebhookResponse(speech,
+		// "Text, Yup I told you so");
+		// }
+		return new WebhookResponse(model,"");
+	}
 
-		return new WebhookResponse(speech,
-				"Text, Yup I told you so");
+	private String getModelByOEMAndCategory(String oem, String category) {
+             if ("BMW".equalsIgnoreCase(oem))	{
+            	 switch(category) {
+            		 case "suv": return "GT. BMW Gran Turismo.";
+            		 case "sedan" : return "BMW 3 series sedan";
+            		 case "compact" : return "BMW X3";
+            	 }
+             } 
+             else if ("Volkswagen".equalsIgnoreCase(oem))	{
+            	 switch(category) {
+        		 case "suv": return "Atlas";
+        		 case "sedan" : return "Jetta";
+        		 case "compact" : return "Golf GTI";
+        	 }
+         }
+             
+             return "No models found for"+" "+oem+" "+category;
 	}
 }
