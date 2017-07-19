@@ -60,7 +60,8 @@ public class GreetingController {
 			case "SPORTWAGONS":
 				return " We have X1 and X3 series.";
 			default:
-				return "We don't have BMW models";
+				return "We don't have that in BMW models";
+
 			}
 		} else if ("Volkswagen".equalsIgnoreCase(oem)) {
 			switch (category.toUpperCase()) {
@@ -73,7 +74,7 @@ public class GreetingController {
 			case "CONVERTIBLE":
 				return "Beetle Convertible.";
 			default:
-				return "We don't have Volkswagen models";
+				return "We don't have that in Volkswagen models";
 
 			}
 		} else if ("Honda".equalsIgnoreCase(oem)) {
@@ -87,12 +88,12 @@ public class GreetingController {
 			case "HYBRID":
 				return "We have Accord Hybrid.";
 			default:
-				return "We don't have Honda models";
+				return "We don't have that in Honda models";
 
 			}
 		}
 
-		return "No models found for" + " " + oem + " " + category;
+		return "No models found for " + oem + " " + category;
 	}
 
 	private String getCategoryByOEM(String oem) {
