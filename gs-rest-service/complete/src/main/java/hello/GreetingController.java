@@ -36,13 +36,13 @@ public class GreetingController {
 		String response = "";
 		if (obj.getResult() != null && obj.getResult().getAction() != null
 				&& obj.getResult().getAction().equalsIgnoreCase("get_model")) {
-			String category = obj.getResult().getParameters().get("category");
-			String oem = obj.getResult().getParameters().get("oem");
+			String category = obj.getResult().getParameters().get("CATEGORY");
+			String oem = obj.getResult().getParameters().get("OEM");
 			response = getModelByOEMAndCategory(oem, category);
 		} else if (obj.getResult() != null
 				&& obj.getResult().getAction() != null
 				&& obj.getResult().getAction().equalsIgnoreCase("get_category")) {
-			String oem = obj.getResult().getParameters().get("oem");
+			String oem = obj.getResult().getParameters().get("OEM");
 			response = getCategoryByOEM(oem);
 		}
 		return new WebhookResponse(response, "");
