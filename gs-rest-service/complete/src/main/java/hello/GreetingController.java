@@ -96,23 +96,19 @@ public class GreetingController {
 	}
 
 	private String getCategoryByOEM(String oem) {
-		if ("BMW".equalsIgnoreCase(oem)) {
-			switch (oem.toUpperCase()) {
-			case "BMW":
-				return "We have COUPE , SEDAN , SPORT WAGONS and CONVERTIBLE categories for "
-						+ oem;
-			case "VOLKSWAGEN":
-				return "We have SUV , SEDAN , COMPACT and CONVERTIBLE categories for "
-						+ oem;
-			case "HONDA":
-				return "We have SUV , SEDAN , HATCHBACK and HYBRID categories for "
-						+ oem;
-			default:
-				return "We don't have any" + oem + "cars";
-			}
+		switch (oem.toUpperCase()) {
+		case "BMW":
+			return "We have COUPE , SEDAN , SPORT WAGONS and CONVERTIBLE categories for "
+					+ oem;
+		case "VOLKSWAGEN":
+			return "We have SUV , SEDAN , COMPACT and CONVERTIBLE categories for "
+					+ oem;
+		case "HONDA":
+			return "We have SUV , SEDAN , HATCHBACK and HYBRID categories for "
+					+ oem;
+		default:
+			return "We don't have any " + oem + " cars";
 		}
-
-		return "We don't have any" + oem + "cars";
 	}
 
 	@RequestMapping(value = "/geoLocation", method = RequestMethod.GET)
