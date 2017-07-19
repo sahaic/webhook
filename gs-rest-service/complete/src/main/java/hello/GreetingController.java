@@ -1,7 +1,15 @@
 package hello;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.commons.configuration2.PropertiesConfigurationLayout;
+import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -106,4 +114,26 @@ public class GreetingController {
 
 		return "We don't have any" + oem + "cars";
 	}
+
+	@RequestMapping(value = "/geoLocation", method = RequestMethod.GET)
+	public void getGeoLocation(
+
+	@RequestParam(value = "address") String formattedAddress)
+			throws ConfigurationException, IOException {
+
+		File file = new File("src/main/resources/application.properties");
+
+		PropertiesConfiguration config = new PropertiesConfiguration();
+
+		PropertiesConfigurationLayout layout = new PropertiesConfigurationLayout();
+
+		layout.load(config, new InputStreamReader(new FileInputStream(file)));
+
+		config.setProperty("address", formattedAddress);
+
+		layout.save(config, new FileWriter(
+				"src/main/resources/application.properties"));
+
+	}
+
 }
