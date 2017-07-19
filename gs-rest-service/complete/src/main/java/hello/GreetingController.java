@@ -50,7 +50,7 @@ public class GreetingController {
 
 	private String getModelByOEMAndCategory(String oem, String category) {
 		if ("BMW".equalsIgnoreCase(oem)) {
-			switch (category) {
+			switch (category.toUpperCase()) {
 			case "COUPE":
 				return "We have 2 series Coupe, 4 series Coupe and BMW i8.";
 			case "SEDAN":
@@ -63,7 +63,7 @@ public class GreetingController {
 				return "We don't have BMW models";
 			}
 		} else if ("Volkswagen".equalsIgnoreCase(oem)) {
-			switch (category) {
+			switch (category.toUpperCase()) {
 			case "SUV":
 				return "We have Atlas and Tiguan.";
 			case "SEDAN":
@@ -77,7 +77,7 @@ public class GreetingController {
 
 			}
 		} else if ("Honda".equalsIgnoreCase(oem)) {
-			switch (category) {
+			switch (category.toUpperCase()) {
 			case "SUV":
 				return "We have CRV and Honda Pilot.";
 			case "SEDAN":
@@ -97,7 +97,7 @@ public class GreetingController {
 
 	private String getCategoryByOEM(String oem) {
 		if ("BMW".equalsIgnoreCase(oem)) {
-			switch (oem) {
+			switch (oem.toUpperCase()) {
 			case "BMW":
 				return "We have COUPE , SEDAN , SPORT WAGONS and CONVERTIBLE categories for "
 						+ oem;
