@@ -2,7 +2,7 @@
 <head>
     <title>StoreAssistant</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript">
         navigator.geolocation.getCurrentPosition(success, error);
         var formatted_address="";	
@@ -91,13 +91,13 @@
             var text = $speechInput.val();
             $.ajax({
                 type: "POST",
-                url: baseUrl + "query",
+                url: baseUrl + "query?v=20171807",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 headers: {
                     "Authorization": "Bearer " + accessToken
                 },
-                data: JSON.stringify({query: text, lang: "en", sessionId: "yaydevdiner"}),
+                data: JSON.stringify({query: text, lang: "en", sessionId: "cdkdealershipassistantbetaversion"}),
 
                 success: function(data) {
                     prepareResponse(data);
@@ -110,7 +110,7 @@
 
         function prepareResponse(val) {
             var debugJSON = JSON.stringify(val, undefined, 2),
-                    spokenResponse = val.result.speech;
+                    spokenResponse = val.result.fulfillment.speech;
 
             respond(spokenResponse);
             debugRespond(debugJSON);
@@ -174,14 +174,16 @@
         }
         .container {
             position: fixed;
-            top: 50%;
+            top: 25%;
             left: 50%;
             -webkit-transform: translate(-50%, -50%);
         }
         input {
-            background-color: #126077;
+           /*  background-color: #126077; */
+            background-color:green;
             border: 1px solid #3F7F93;
-            color: #A6CAE6;
+           /*  color: #A6CAE6; */
+            color:white;
             font-family: "Titillium Web";
             font-size: 20px;
             line-height: 43px;
@@ -200,10 +202,18 @@
         input:active, input:focus, textarea:active, textarea:focus {
             outline: 1px solid #48788B;
         }
+         .logo{		
+            font-family: "Titillium Web";		
+            text-align: center;		
+            font-size: 45px;		
+            color:green;		
+        }
         .btn {
-            background-color: #126178;
+            /* background-color: #126178; */
+            background-color: green;
             border: 1px solid #549EAF;
-            color: #549EAF;
+            /* color: #549EAF; */
+            color:white;
             cursor: pointer;
             display: inline-block;
             font-family: "Titillium Web";
@@ -215,7 +225,8 @@
             -webkit-transition: all 0.35s ease-in;
         }
         .btn:hover {
-            background-color: #1888A9;
+            /* background-color: #1888A9; */
+            background-color:white;
             color: #183035;
         }
         .debug {
@@ -251,8 +262,9 @@
         }
     </style>
 </head>
-<body>
+<body background="background_car.jpg">
 <div class="container">
+<p class="logo">CDK Dealership Assistant</p>
     <input id="speech" type="text">
     <button id="rec" class="btn">Speak</button>
     <div id="spokenResponse" class="spoken-response">
