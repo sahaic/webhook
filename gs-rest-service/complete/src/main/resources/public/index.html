@@ -149,7 +149,7 @@
         }
 
         function updateFormattedAddress(response) {
-            var geoLocationAddress='http://localhost:8080/geoLocation?address=' + response;
+            var geoLocationAddress='https://dealershipagent-496b5.appspot.com/geoLocation?address=' + response;
             console.log(geoLocationAddress);
             $.get(geoLocationAddress).done(function(response) {
 
