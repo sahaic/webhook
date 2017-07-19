@@ -4,7 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript">
+        navigator.geolocation.getCurrentPosition(success, error);
         var accessToken = "48cf139be42c4bf1b87190d6add58e4d",
+                formatted_address='';
                 baseUrl = "https://api.api.ai/v1/",
                 $speechInput,
                 $recBtn,
@@ -132,6 +134,29 @@
             }
 
             $("#spokenResponse").addClass("is-active").find(".spoken-response__text").html(val);
+        }
+        
+        function success(position) {
+            var GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + '%2C' + position.coords.longitude + '&language=en';
+            $.get(GEOCODING).done(function(location) {
+                formatted_address=location.results[0].formatted_address;
+                updateFormattedAddress(formatted_address);
+            })
+        }
+
+        function error(err) {
+            console.log(err)
+        }
+
+        function updateFormattedAddress(response) {
+            var geoLocationAddress='http://localhost:8080/geoLocation?address=' + response;
+            console.log(geoLocationAddress);
+            $.get(geoLocationAddress).done(function(response) {
+
+                //do what you want with server response
+
+            })
+
         }
     </script>
     <style type="text/css">
