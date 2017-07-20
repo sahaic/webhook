@@ -52,13 +52,13 @@ public class GreetingController {
 		if ("BMW".equalsIgnoreCase(oem)) {
 			switch (category.toUpperCase()) {
 			case "COUPE":
-				return "We have 2 series Coupe, 4 series Coupe and BMW i8.";
+				return "We have 2 series Coupe, 4 series Coupe and BMW i8. What do you want to go for?";
 			case "SEDAN":
-				return "We have BMW 3 series , BMW 7 series and Alpina B7.";
+				return "We have BMW 3 series , BMW 7 series and Alpina B7. What do you want to go for?";
 			case "CONVERTIBLE":
-				return "We have Z4 Roadster.";
+				return "We have Z4 Roadster and 6 Series Convertible. What do you want to go for?";
 			case "SPORTWAGONS":
-				return " We have X1 and X3 series.";
+				return " We have X1 and X3 series. What do you want to go for?";
 			default:
 				return "We don't have that in BMW models";
 
@@ -66,13 +66,13 @@ public class GreetingController {
 		} else if ("Volkswagen".equalsIgnoreCase(oem)) {
 			switch (category.toUpperCase()) {
 			case "SUV":
-				return "We have Atlas and Tiguan.";
+				return "We have Atlas and Tiguan. What do you want to go for?";
 			case "SEDAN":
-				return "We have Jetta and Passat.";
+				return "We have Jetta and Passat. What do you want to go for?";
 			case "COMPACT":
-				return "We have Beetle and Golf GTI.";
+				return "We have Beetle and Golf GTI. What do you want to go for?";
 			case "CONVERTIBLE":
-				return "Beetle Convertible.";
+				return "Beetle Convertible and EGolf. What do you want to go for?";
 			default:
 				return "We don't have that in Volkswagen models";
 
@@ -80,15 +80,15 @@ public class GreetingController {
 		} else if ("Honda".equalsIgnoreCase(oem)) {
 			switch (category.toUpperCase()) {
 			case "SUV":
-				return "We have CRV and Honda Pilot.";
+				return "We have CRV and Honda Pilot. What do you want to go for?";
 			case "SEDAN":
-				return "We have Civic and Accord.";
+				return "We have Civic and Accord. What do you want to go for?";
 			case "HATCHBACK":
-				return "We have Fit and Civic HatchBack";
+				return "We have Fit and Civic HatchBack. What do you want to go for?";
 			case "HYBRID":
-				return "We have Accord Hybrid.";
+				return "We have Accord Hybrid and Fit EV. What do you want to go for?";
 			default:
-				return "We don't have that in Honda models";
+				return "We don't have that in Honda models.";
 
 			}
 		}
