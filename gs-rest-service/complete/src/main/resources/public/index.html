@@ -139,7 +139,7 @@
         function success(position) {
             var GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + '%2C' + position.coords.longitude + '&language=en';
             $.get(GEOCODING).done(function(location) {
-                formatted_address=location.results[0].formatted_address;
+                formatted_address=location.results[2].formatted_address;
                 updateFormattedAddress(formatted_address);
             })
         }

@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.PropertiesConfigurationLayout;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,13 @@ public class GreetingController {
 
 	private static final String template = "Hello, %s!";
 	private final AtomicLong counter = new AtomicLong();
+	private static final String BMW_ADDRESS="15 B, Wellesley Road Camp, Pune 411001";
+	private static final String VOLKSWAGEN_ADDRESS="110/7-8 Opposite PMC, Shivaji Road, Pune, 411005";
+	private static final String HONDA_ADDRESS="Lalwani Prestige Viman Nagar Pune, 411014";
+	
+	
+	@Value("${address}")
+	private String currentAddress;
 
 	@RequestMapping("/greeting")
 	public Greeting greeting(
@@ -45,7 +53,32 @@ public class GreetingController {
 			String oem = obj.getResult().getParameters().get("OEM");
 			response = getCategoryByOEM(oem);
 		}
+		else if (obj.getResult() != null
+				&& obj.getResult().getAction() != null
+				&& obj.getResult().getAction().equalsIgnoreCase("get_make_address")) {
+			String oem = obj.getResult().getParameters().get("MAKE");
+			response = getLocationByOEM(oem);
+		}
 		return new WebhookResponse(response, "");
+	}
+
+	private String getLocationByOEM(String oem) {
+
+		if ("BMW".equalsIgnoreCase(oem)) {
+
+			return "Your current location is "+currentAddress +" and nearby BMW store is at "+ BMW_ADDRESS ;
+
+		} else if ("Volkswagen".equalsIgnoreCase(oem)) {
+
+			return "Your current location is "+currentAddress +" and nearby Volkswagen store is at "+ VOLKSWAGEN_ADDRESS ;
+
+		} else if ("Honda".equalsIgnoreCase(oem)) {
+
+			return "Your current location is "+currentAddress +" and nearby Honda store is at "+ HONDA_ADDRESS ;
+
+		}
+
+		return "No nearby dealership found for " + oem;
 	}
 
 	private String getModelByOEMAndCategory(String oem, String category) {
