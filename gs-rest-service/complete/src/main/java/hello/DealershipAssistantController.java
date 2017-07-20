@@ -1,16 +1,8 @@
 package hello;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.concurrent.atomic.AtomicLong;
 
-import org.apache.commons.configuration2.PropertiesConfiguration;
-import org.apache.commons.configuration2.PropertiesConfigurationLayout;
 import org.apache.commons.configuration2.ex.ConfigurationException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,24 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GreetingController {
+public class DealershipAssistantController {
 
-	private static final String template = "Hello, %s!";
-	private final AtomicLong counter = new AtomicLong();
 	private static final String BMW_ADDRESS="15 B, Wellesley Road Camp, Pune 411001";
 	private static final String VOLKSWAGEN_ADDRESS="110/7-8 Opposite PMC, Shivaji Road, Pune, 411005";
 	private static final String HONDA_ADDRESS="Lalwani Prestige Viman Nagar Pune, 411014";
-	
-	
-	@Value("${address}")
-	private String currentAddress;
-
-	@RequestMapping("/greeting")
-	public Greeting greeting(
-			@RequestParam(value = "name", defaultValue = "World") String name) {
-		return new Greeting(counter.incrementAndGet(), String.format(template,
-				name));
-	}
+	private UserLocation userLocation;
 
 	@RequestMapping(value = "/getByAttribute", method = RequestMethod.POST)
 	public @ResponseBody WebhookResponse getModels(
@@ -66,15 +46,15 @@ public class GreetingController {
 
 		if ("BMW".equalsIgnoreCase(oem)) {
 
-			return "Your current location is "+currentAddress +" and nearby BMW store is at "+ BMW_ADDRESS ;
+			return "Your current location is "+userLocation.getUserLocation() +" and nearby BMW store is at "+ BMW_ADDRESS ;
 
 		} else if ("Volkswagen".equalsIgnoreCase(oem)) {
 
-			return "Your current location is "+currentAddress +" and nearby Volkswagen store is at "+ VOLKSWAGEN_ADDRESS ;
+			return "Your current location is "+userLocation.getUserLocation() +" and nearby Volkswagen store is at "+ VOLKSWAGEN_ADDRESS ;
 
 		} else if ("Honda".equalsIgnoreCase(oem)) {
 
-			return "Your current location is "+currentAddress +" and nearby Honda store is at "+ HONDA_ADDRESS ;
+			return "Your current location is "+userLocation.getUserLocation() +" and nearby Honda store is at "+ HONDA_ADDRESS ;
 
 		}
 
@@ -148,21 +128,10 @@ public class GreetingController {
 	@RequestMapping(value = "/geoLocation", method = RequestMethod.GET)
 	public void getGeoLocation(
 
-	@RequestParam(value = "address") String formattedAddress)
-			throws ConfigurationException, IOException {
-
-		File file = new File("src/main/resources/application.properties");
-
-		PropertiesConfiguration config = new PropertiesConfiguration();
-
-		PropertiesConfigurationLayout layout = new PropertiesConfigurationLayout();
-
-		layout.load(config, new InputStreamReader(new FileInputStream(file)));
-
-		config.setProperty("address", formattedAddress);
-
-		layout.save(config, new FileWriter(
-				"src/main/resources/application.properties"));
+	@RequestParam(value = "address") String formattedAddress) throws ConfigurationException, IOException
+	{
+		userLocation=new UserLocation();
+        userLocation.setUserLocation(formattedAddress);		
 
 	}
 
