@@ -174,7 +174,7 @@
         }
         .container {
             position: fixed;
-            top: 25%;
+            top: 15%;
             left: 50%;
             -webkit-transform: translate(-50%, -50%);
         }
@@ -256,13 +256,21 @@
             max-height: 400px;
         }
         .spoken-response__text {
-            background-color: #040E23;
-            color: #7584A2;
+             /* background-color: #040E23; */
+             background-color: green;
+            /* color: #7584A2; */
+            color: white;
             padding: 1em;
+            width:493px;
+        }
+        .bg{
+            background-image:url(background_car.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     </style>
 </head>
-<body background="background_car.jpg">
+<body class="bg">
 <div class="container">
 <p class="logo">CDK Dealership Assistant</p>
     <input id="speech" type="text">
@@ -271,14 +279,14 @@
         <div class="spoken-response__text"></div>
     </div>
 </div>
-<div class="debug">
+<!-- <div class="debug">
     <div class="debug__btn btn">
         Debug JSON results
     </div>
     <div class="debug__content">
         <textarea id="response" cols="40" rows="20"></textarea>
     </div>
-</div>
+</div> -->
 
 <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet" type="text/css">
 </body>
