@@ -15,4 +15,3 @@ dependency-reduced-pom.xml
 README.html
 *.iml
 .idea
-node_modules
