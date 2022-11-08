@@ -15,7 +15,7 @@ This guide walks you through the process of creating a "hello world" link:/under
 
 == What you'll build
 
-You'll build a service that will accept HTTP GET requests at:
+You'll build a service that will accept HTTP GET requests at
 
 ----
 http://localhost:8080/greeting
